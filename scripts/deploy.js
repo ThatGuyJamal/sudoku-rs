@@ -3,8 +3,8 @@ let gh = require("gh-pages");
 gh.publish(
 	"doc",
 	{
-		branch: "main",
-		repo: "https://example.com/other/repo.git",
+		branch: "docs",
+		repo: "https://github.com/ThatGuyJamal/sudoku-rs.git",
 	},
 	function (err) {
 		if (err) {
