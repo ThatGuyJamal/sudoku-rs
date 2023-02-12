@@ -4,9 +4,12 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="generator" content="rustdoc" />
-		<meta name="description" content="Documentation for Rustdoc" />
-		<meta name="keywords" content="rust, rustlang, rust-lang" />
-		<title>Rustdoc help</title>
+		<meta
+			name="description"
+			content="API documentation for the Rust `main` fn in crate `sudoku`."
+		/>
+		<meta name="keywords" content="rust, rustlang, rust-lang, main" />
+		<title>main in sudoku - Rust</title>
 		<link
 			rel="preload"
 			as="font"
@@ -56,13 +59,14 @@
 		<link rel="stylesheet" href="./light.css" id="themeStyle" />
 		<script id="default-settings"></script>
 		<script src="./storage.js"></script>
+		<script defer src="sidebar-items.js"></script>
 		<script defer src="./main.js"></script>
 		<noscript><link rel="stylesheet" href="./noscript.css" /></noscript>
 		<link rel="alternate icon" type="image/png" href="./favicon-16x16.png" />
 		<link rel="alternate icon" type="image/png" href="./favicon-32x32.png" />
 		<link rel="icon" type="image/svg+xml" href="./favicon.svg" />
 	</head>
-	<body class="rustdoc mod">
+	<body class="rustdoc fn">
 		<!--[if lte IE 11
 			]><div class="warning">
 				This old browser is unsupported and will most likely display funky things.
@@ -81,8 +85,9 @@
 				><div class="logo-container">
 					<img class="rust-logo" src="./rust-logo.svg" alt="logo" /></div
 			></a>
-			<h2 class="location">Help</h2>
-			<div class="sidebar-elems"></div>
+			<div class="sidebar-elems">
+				<h2><a href="index.html">In sudoku</a></h2>
+			</div>
 		</nav>
 		<main>
 			<div class="width-limiter">
@@ -109,22 +114,35 @@
 				</nav>
 				<section id="main-content" class="content">
 					<div class="main-heading">
-						<h1 class="fqn">Rustdoc help</h1>
+						<h1 class="fqn">
+							Function <a href="index.html">sudoku</a>::<wbr /><a class="fn" href="#"
+								>main</a
+							><button
+								id="copy-path"
+								onclick="copy_path(this)"
+								title="Copy item path to clipboard"
+							>
+								<img
+									src="./clipboard.svg"
+									width="19"
+									height="18"
+									alt="Copy item path"
+								/>
+							</button>
+						</h1>
 						<span class="out-of-band"
-							><a id="back" href="javascript:void(0)" onclick="history.back();"
-								>Back</a
+							><a class="srclink" href="./src/sudoku/main.rs.html#19-68">source</a> ·
+							<a
+								id="toggle-all-docs"
+								href="javascript:void(0)"
+								title="collapse all docs"
+								>[<span class="inner">&#x2212;</span>]</a
 							></span
 						>
 					</div>
-					<noscript
-						><section>
-							<p>You need to enable Javascript to use keyboard commands or search.</p>
-							<p>
-								For more information, browse the
-								<a href="https://doc.rust-lang.org/rustdoc/">rustdoc handbook</a>.
-							</p>
-						</section></noscript
-					>
+					<div class="item-decl">
+						<pre class="rust fn"><code>pub(crate) fn main()</code></pre>
+					</div>
 				</section>
 			</div>
 		</main>

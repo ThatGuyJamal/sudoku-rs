@@ -1,0 +1,26 @@
+{
+  "name": "sudoku-rs",
+  "version": "1.0.0",
+  "description": "A simple Sudoku game made with [rust](https://www.rust-lang.org/) and [piston](https://github.com/PistonDevelopers/piston)",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThatGuyJamal/sudoku-rs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThatGuyJamal/sudoku-rs/issues"
+  },
+  "homepage": "https://github.com/ThatGuyJamal/sudoku-rs#readme",
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
+  }
+}
