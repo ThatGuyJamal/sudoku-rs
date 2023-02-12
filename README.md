@@ -18,3 +18,7 @@ Steps:
 2. `cd rust\learn\sudoku`
 3. `cargo build`
 4. `cargo run`
+
+## Docs
+
+[here](https://thatguyjamal.github.io/sudoku-rs/)
