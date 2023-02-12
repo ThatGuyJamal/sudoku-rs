@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src\gameboard_controller.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>gameboard_controller.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../sudoku/SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../sudoku/FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../sudoku/FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../sudoku/SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../sudoku/SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../sudoku/SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../sudoku/normalize.css"><link rel="stylesheet" href="../../sudoku/rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../sudoku/ayu.css" disabled><link rel="stylesheet" href="../../sudoku/dark.css" disabled><link rel="stylesheet" href="../../sudoku/light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../sudoku/storage.js"></script><script defer src="../../sudoku/source-script.js"></script><script defer src="../../sudoku/source-files.js"></script><script defer src="../../sudoku/main.js"></script><noscript><link rel="stylesheet" href="../../sudoku/noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../sudoku/favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../sudoku/favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../sudoku/favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sudoku/sudoku/index.html"><img class="rust-logo" src="../../sudoku/rust-logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../sudoku/help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../sudoku/settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../sudoku/wheel.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Gameboard controller.
+
+</span><span class="kw">use </span>piston::GenericEvent;
+
+<span class="kw">use </span><span class="kw">crate</span>::Gameboard;
+
+<span class="doccomment">/// Handles events for Sudoku game.
+</span><span class="kw">pub struct </span>GameboardController {
+    <span class="doccomment">/// Stores the gameboard state.
+    </span><span class="kw">pub </span>gameboard: Gameboard,
+    <span class="doccomment">/// Selected cell.
+    </span><span class="kw">pub </span>selected_cell: <span class="prelude-ty">Option</span>&lt;[usize; <span class="number">2</span>]&gt;,
+    <span class="doccomment">/// Stores last mouse cursor position.
+    </span>cursor_pos: [f64; <span class="number">2</span>],
+}
+
+<span class="kw">impl </span>GameboardController {
+    <span class="doccomment">/// Creates a new gameboard controller.
+    </span><span class="kw">pub fn </span>new(gameboard: Gameboard) -&gt; GameboardController {
+        GameboardController {
+            gameboard,
+            selected_cell: <span class="prelude-val">None</span>,
+            cursor_pos: [<span class="number">0.0</span>; <span class="number">2</span>],
+        }
+    }
+
+    <span class="doccomment">/// Handles events.
+    </span><span class="kw">pub fn </span>event&lt;E: GenericEvent&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, pos: [f64; <span class="number">2</span>], size: f64, e: <span class="kw-2">&amp;</span>E) {
+        <span class="kw">use </span>piston::input::{Button, Key, MouseButton};
+
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(pos) = e.mouse_cursor_args() {
+            <span class="self">self</span>.cursor_pos = pos;
+        }
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(Button::Mouse(MouseButton::Left)) = e.press_args() {
+            <span class="comment">// Find coordinates relative to upper left corner.
+            </span><span class="kw">let </span>x = <span class="self">self</span>.cursor_pos[<span class="number">0</span>] - pos[<span class="number">0</span>];
+            <span class="kw">let </span>y = <span class="self">self</span>.cursor_pos[<span class="number">1</span>] - pos[<span class="number">1</span>];
+            <span class="comment">// Check that coordinates are inside board boundaries.
+            </span><span class="kw">if </span>x &gt;= <span class="number">0.0 </span>&amp;&amp; x &lt;= size &amp;&amp; y &gt;= <span class="number">0.0 </span>&amp;&amp; y &lt;= size {
+                <span class="comment">// Compute the cell position.
+                </span><span class="kw">let </span>cell_x = (x / size * <span class="number">9.0</span>) <span class="kw">as </span>usize;
+                <span class="kw">let </span>cell_y = (y / size * <span class="number">9.0</span>) <span class="kw">as </span>usize;
+                <span class="self">self</span>.selected_cell = <span class="prelude-val">Some</span>([cell_x, cell_y]);
+            }
+        }
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(Button::Keyboard(key)) = e.press_args() {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(ind) = <span class="self">self</span>.selected_cell {
+                <span class="comment">// Set cell value.
+                </span><span class="kw">match </span>key {
+                    Key::D1 =&gt; <span class="self">self</span>.gameboard.set(ind, <span class="number">1</span>),
+                    Key::D2 =&gt; <span class="self">self</span>.gameboard.set(ind, <span class="number">2</span>),
+                    Key::D3 =&gt; <span class="self">self</span>.gameboard.set(ind, <span class="number">3</span>),
+                    Key::D4 =&gt; <span class="self">self</span>.gameboard.set(ind, <span class="number">4</span>),
+                    Key::D5 =&gt; <span class="self">self</span>.gameboard.set(ind, <span class="number">5</span>),
+                    Key::D6 =&gt; <span class="self">self</span>.gameboard.set(ind, <span class="number">6</span>),
+                    Key::D7 =&gt; <span class="self">self</span>.gameboard.set(ind, <span class="number">7</span>),
+                    Key::D8 =&gt; <span class="self">self</span>.gameboard.set(ind, <span class="number">8</span>),
+                    Key::D9 =&gt; <span class="self">self</span>.gameboard.set(ind, <span class="number">9</span>),
+                    Key::Backspace =&gt; <span class="self">self</span>.gameboard.set(ind, <span class="number">0</span>),
+                    <span class="kw">_ </span>=&gt; {}
+                }
+            }
+        }
+    }
+}
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../sudoku/" data-current-crate="sudoku" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0 (69f9c33d7 2022-12-12)" ></div></body></html>
