@@ -1,6 +1,7 @@
 //! Game board logic.
 
-use std::fs::read_to_string;
+// use std::fs::read_to_string;
+use rand::{thread_rng, Rng};
 
 /// Size of game board.
 const SIZE: usize = 9;
@@ -32,12 +33,40 @@ impl Gameboard {
     }
 
     /// Load a new game board from the SDM file in `filename`
-    pub fn load_sdm(filename: &str) -> Self {
-        let data = read_to_string(filename).expect("failed to read SDM file");
+    pub fn load_sdm() -> Self {
+        // let data = read_to_string(filename).expect("failed to read SDM file");
+
+        let puzzles  = [
+            // Easy
+            String::from("050703060007000800000816000000030000005000100730040086906000204840572093000409000"),
+            String::from("302401809001000300000000000040708010780502036000090000200609003900000008800070005"),
+            String::from("000823001003000400070000052300960010000102000010038006830000040002000900600789000"),
+            String::from("500700032100326000000000000020070058010803040890040070000000000000654001230009005"),
+            String::from("760000053020080040005000900000000000040010070603000104100304009000000000006827300"),
+            String::from("140000050700200000000300204200080400080090020006050001809001000000006007050000069"),
+            String::from("002009000015008760040000051620407000000010000000206074170000090098500610000700800"),
+            String::from("060010030830605029000000000006030900092000570000409000285000716000000000470000095"),
+            String::from("600002305000970016021000009070643000000000000000891040200000530310064000904700001"),
+            String::from("007020850200516000400000006070648090930102068060953020700000005000495002029060100"),
+            String::from("003700040200954800094103702039000486060000020452000390607408950005297004040005200"),
+            String::from("014600380980201074200000009050108093000050000890302010300000005570403061068009230"),
+            // Medium
+            String::from("020900000048000031000063020009407003003080200400105600030570000250000180000006050"),
+            String::from("100800570000009210090040000300900050007000300020006008000020040071400000064007003"),
+            String::from("002000800005020100460000029130060052009080400000302000006070200700000008020519070"),
+            String::from("802600009000058000006000401090406005020000040600203090205000900000970000100002804"),
+            // Hard
+            String::from("080200400570000100002300000820090005000715000700020041000006700003000018007009050"),
+            String::from("600050007030000000080409200015300000008000300000007590009501030000000080200070004"),
+        ];
+
+        let puzzle = select_random_string(&puzzles);
+
         let mut cells = [[Cell::default(); SIZE]; SIZE];
         let mut row = 0;
         let mut col = 0;
-        for c in data.chars() {
+
+        for c in puzzle.chars() {
             if col == SIZE {
                 col = 0;
                 row += 1;
@@ -145,13 +174,21 @@ impl Gameboard {
     }
 }
 
+/// Select a random string from a slice
+// This is used to select a random puzzle from the SDM string array
+fn select_random_string(arr: &[String]) -> &String {
+    let random_index = thread_rng().gen_range(0..arr.len());
+    &arr[random_index]
+}
+
+
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
     fn load_sdm() {
-        let got = Gameboard::load_sdm("puzzles/puzzle.sdm");
+        let got = Gameboard::load_sdm();
         let want = Gameboard::from_cells([
             [0, 1, 6, 4, 0, 0, 0, 0, 0],
             [2, 0, 0, 0, 0, 9, 0, 0, 0],

@@ -6,9 +6,15 @@ A simple Sudoku game made with [rust](https://www.rust-lang.org/) and [piston](h
 
 ![example image](./sudoku_example.png)
 
+## Features
+
+- [x] 9x9 Sudoku Board
+- [x] Random Puzzle Generation
+- [ ] Saving current game progress
+
 ## Running Yourself
 
-To run the game you need to have a rust development enviroment install on your computer. 
+To run the game you need to have a rust development environment install on your computer. 
 
 Steps:
 
@@ -22,14 +28,9 @@ Click [here](https://thatguyjamal.github.io/sudoku-rs/).
 
 ## Todo
 
-While the game is playable in theory, it can have some improvments. 
+While the game is playable in theory, it can have some improvements. 
 
-- [ ] Randomized Puzzle Generations
-
-> Right now only one demo puzzle is hard coded into the game 
-
-- [ ] Saving current game progess
-
-> Currently when the application is closed all data is lost. It would be nice to have a local save of the current game data.
-
-- [ ] A button to generate a new game after the current game is completed.
+- save games in progress
+- restart a puzzle
+- get a hint
+- load a different puzzle

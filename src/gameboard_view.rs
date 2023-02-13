@@ -73,7 +73,7 @@ pub struct GameboardView {
 
 impl GameboardView {
     /// Creates a new gameboard view.
-    pub fn new(settings: GameboardViewSettings) -> GameboardView {
+    pub fn new(settings: GameboardViewSettings) -> Self {
         GameboardView { settings }
     }
 
@@ -207,6 +207,7 @@ impl GameboardView {
             }
         }
 
+
         // Draw board edge.
         Rectangle::new_border(settings.board_edge_color, settings.board_edge_radius).draw(
             board_rect,
@@ -216,6 +217,8 @@ impl GameboardView {
         );
     }
 }
+
+
 
 /// color an individual cell in the grid
 fn color_cell<G: Graphics>(

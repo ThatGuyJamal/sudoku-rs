@@ -5,7 +5,13 @@
 use glutin_window::GlutinWindow;
 use opengl_graphics::{Filter, GlGraphics, GlyphCache, OpenGL, TextureSettings};
 use piston::event_loop::{EventSettings, Events};
-use piston::{EventLoop, RenderEvent, WindowSettings};
+use piston::{
+    EventLoop,
+    RenderEvent,
+    WindowSettings,
+    // Used to get keyboard and mouse input.
+    // Button, PressEvent, ReleaseEvent
+};
 
 // LOCAL IMPORTS
 pub use crate::gameboard::Gameboard;
@@ -36,7 +42,7 @@ fn main() {
     // The gl object stores shaders and buffers that the OpenGL backend for Piston-Graphics needs to talk with the GPU.
     let mut gl = GlGraphics::new(opengl);
 
-    let gameboard = Gameboard::load_sdm("static/puzzle.sdm");
+    let gameboard = Gameboard::load_sdm();
     let mut gameboard_controller = GameboardController::new(gameboard);
     let gameboard_view_settings = GameboardViewSettings::new();
     let gameboard_view = GameboardView::new(gameboard_view_settings);
@@ -64,5 +70,14 @@ fn main() {
                 gameboard_view.draw(&gameboard_controller, glyphs, &c, g);
             });
         }
+
+        // if let Some(button) = e.release_args() {
+        //     match button {
+        //         Button::Keyboard(key) => println!("Released keyboard key '{:?}'", key),
+        //         Button::Mouse(button) => println!("Released mouse button '{:?}'", button),
+        //         Button::Controller(button) => println!("Released controller button '{:?}'", button),
+        //         Button::Hat(hat) => println!("Released controller hat `{:?}`", hat),
+        //     }
+        // };
     }
 }
