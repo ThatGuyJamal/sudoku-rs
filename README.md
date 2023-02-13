@@ -1,8 +1,6 @@
 # Sudoku
 
-A simple Sudoku game made with [rust](https://www.rust-lang.org/) and [piston](https://github.com/PistonDevelopers/piston)
-
-This game is a sample and showing my learning in the rust language. For more information view the [tutorial](https://github.com/PistonDevelopers/Piston-Tutorials/tree/master/sudoku) I followed to make this game!
+A simple Sudoku game made with [rust](https://www.rust-lang.org/) and [piston](https://github.com/PistonDevelopers/piston).
 
 ## Example
 
@@ -16,9 +14,8 @@ Steps:
 
 1. `git clone https://github.com/ThatGuyJamal/Learning-Code`
 2. `cd rust\learn\sudoku`
-3. `cargo build`
-4. `cargo run`
+3. `cargo run`
 
 ## Docs
 
-[here](https://thatguyjamal.github.io/sudoku-rs/)
+Click [here](https://thatguyjamal.github.io/sudoku-rs/).
