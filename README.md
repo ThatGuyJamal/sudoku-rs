@@ -19,3 +19,17 @@ Steps:
 ## Docs
 
 Click [here](https://thatguyjamal.github.io/sudoku-rs/).
+
+## Todo
+
+While the game is playable in theory, it can have some improvments. 
+
+- [ ] Randomized Puzzle Generations
+
+> Right now only one demo puzzle is hard coded into the game 
+
+- [ ] Saving current game progess
+
+> Currently when the application is closed all data is lost. It would be nice to have a local save of the current game data.
+
+- [ ] A button to generate a new game after the current game is completed.
