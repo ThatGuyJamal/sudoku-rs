@@ -10,7 +10,6 @@ A simple Sudoku game made with [rust](https://www.rust-lang.org/) and [piston](h
 
 - [x] 9x9 Sudoku Board
 - [x] Random Puzzle Generation
-- [ ] Saving current game progress
 
 ## Running Yourself
 
@@ -18,13 +17,13 @@ To run the game you need to have a rust development environment install on your 
 
 Steps:
 
-1. `git clone https://github.com/ThatGuyJamal/Learning-Code`
-2. `cd rust\learn\sudoku`
+1. `git clone https://github.com/ThatGuyJamal/sudoki-rs`
+2. `cargo build`
 3. `cargo run`
 
 ## Docs
 
-Click [here](https://thatguyjamal.github.io/sudoku-rs/).
+[Click here](https://thatguyjamal.github.io/sudoku-rs/).
 
 ## Todo
 
